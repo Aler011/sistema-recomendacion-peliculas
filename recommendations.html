@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .recommendation {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .recommendation:last-child {
+            border-bottom: none;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover {
+            background-color: #0b7dda;
+        }
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-info">
+            Usuario: <span id="current-user"></span>
+        </div>
+        <h1>Tus Recomendaciones</h1>
+        <div id="recommendations-list"></div>
+        <a href="movies.html" class="back-btn">Volver a Películas</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                window.location.href = 'register.html';
+                return;
+            }
+
+            document.getElementById('current-user').textContent = currentUser;
+            loadRecommendations(currentUser);
+        });
+
+        function loadRecommendations(username) {
+            fetch(`http://localhost:5000/recommend?username=${encodeURIComponent(username)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('recommendations-list');
+                    
+                    if (data.recommendations && data.recommendations.length > 0) {
+                        if (typeof data.recommendations === 'string') {
+                            container.innerHTML = `<p>${data.recommendations}</p>`;
+                        } else {
+                            container.innerHTML = data.recommendations
+                                .map(movie => `<div class="recommendation">${movie}</div>`)
+                                .join('');
+                        }
+                    } else {
+                        container.innerHTML = '<p>No hay recomendaciones disponibles en este momento.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('recommendations-list').innerHTML = 
+                        '<p>Error al cargar recomendaciones. Intenta de nuevo más tarde.</p>';
+                });
+        }
+    </script>
+</body>
+</html>

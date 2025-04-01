@@ -1,0 +1,22 @@
+Autor: Alexis Rosaldo
+Ejecución: 
+python app.py
+
+Pruebas:
+
+    Con POSTAMN:
+
+        Obtener películas:
+        GET http://localhost:5000/movies
+
+        Agregar rating:
+        POST http://localhost:5000/rate
+        Body (JSON):
+        {
+            "username": "NuevoUsuario",
+            "movie_name": "Cyber Revolt",
+            "rating": 4
+        }
+
+        Obtener recomendaciones:
+        GET http://localhost:5000/recommend?username=Ana

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar Película</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .movie-info {
+            margin-bottom: 20px;
+        }
+        .movie-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .rating-form {
+            margin-top: 20px;
+        }
+        input {
+            width: 60px;
+            padding: 8px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .recommend-btn {
+            background-color: #9C27B0;
+            color: white;
+        }
+        .cancel-btn {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="movie-info">
+            <div class="movie-title" id="movie-title"></div>
+            <div id="movie-description"></div>
+        </div>
+        
+        <div class="rating-form">
+            <p>Califica esta película (1-5):</p>
+            <input type="number" id="rating" min="1" max="5" value="3">
+            <button class="submit-btn" onclick="submitRating()">Enviar Calificación</button>
+            <button class="recommend-btn" onclick="getRecommendations()">Ver Recomendaciones</button>
+            <button class="cancel-btn" onclick="cancelRating()">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUser = localStorage.getItem('currentUser');
+            const currentMovie = localStorage.getItem('currentMovie');
+            
+            if (!currentUser || !currentMovie) {
+                window.location.href = 'register.html';
+                return;
+            }
+
+            // Obtener detalles de la película
+            fetch('http://localhost:5000/movies')
+                .then(response => response.json())
+                .then(data => {
+                    const movie = data.movies.find(m => m.Nombre === currentMovie);
+                    if (movie) {
+                        document.getElementById('movie-title').textContent = movie.Nombre;
+                        document.getElementById('movie-description').textContent = movie.Descripción;
+                    }
+                });
+        });
+
+        function submitRating() {
+            const rating = parseInt(document.getElementById('rating').value);
+            const currentUser = localStorage.getItem('currentUser');
+            const currentMovie = localStorage.getItem('currentMovie');
+
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+                alert('Por favor ingresa un número entre 1 y 5');
+                return;
+            }
+
+            fetch('http://localhost:5000/rate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: currentUser,
+                    movie_name: currentMovie,
+                    rating: rating
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert('Calificación enviada con éxito!');
+                    window.location.href = 'rate.html';
+                } else {
+                    alert(data.error || 'Error al enviar calificación');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al conectar con el servidor');
+            });
+        }
+
+        function getRecommendations() {
+            window.location.href = 'recommendations.html';
+        }
+
+        function cancelRating() {
+            window.location.href = 'movies.html';
+        }
+    </script>
+</body>
+</html>

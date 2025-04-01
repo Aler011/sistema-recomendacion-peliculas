@@ -1,0 +1,108 @@
+[
+  {
+    "username": "Ana",
+    "ratings": {
+      "Cyber Revolt": 4,
+      "Eclipse Carmesí": 2,
+      "Destino: Marte": 5,
+      "Lágrimas de Acero": 3,
+      "Código Letal": 4
+    }
+  },
+  {
+    "username": "Carlos",
+    "ratings": {
+      "Cyber Revolt": 5,
+      "El Último Cazador": 4,
+      "Código Letal": 3,
+      "Sombras del Pasado": 5,
+      "El Eco del Silencio": 2
+    }
+  },
+  {
+    "username": "María",
+    "ratings": {
+      "Eclipse Carmesí": 5,
+      "Más Allá del Cosmos": 3,
+      "La Ciudad de los Perdidos": 4,
+      "Sombras del Pasado": 4,
+      "El Eco del Silencio": 5
+    }
+  },
+  {
+    "username": "Pedro",
+    "ratings": {
+      "Cyber Revolt": 2,
+      "El Último Cazador": 5,
+      "Destino: Marte": 4,
+      "Lágrimas de Acero": 1,
+      "Código Letal": 3
+    }
+  },
+  {
+    "username": "Laura",
+    "ratings": {
+      "Más Allá del Cosmos": 5,
+      "La Ciudad de los Perdidos": 5,
+      "Destino: Marte": 4,
+      "Sombras del Pasado": 3,
+      "El Eco del Silencio": 4
+    }
+  },
+  {
+    "username": "Javier",
+    "ratings": {
+      "Cyber Revolt": 3,
+      "Eclipse Carmesí": 4,
+      "El Último Cazador": 2,
+      "Lágrimas de Acero": 5,
+      "Código Letal": 4
+    }
+  },
+  {
+    "username": "Sofía",
+    "ratings": {
+      "Eclipse Carmesí": 1,
+      "Más Allá del Cosmos": 4,
+      "Destino: Marte": 5,
+      "Sombras del Pasado": 2,
+      "El Eco del Silencio": 3
+    }
+  },
+  {
+    "username": "Diego",
+    "ratings": {
+      "Cyber Revolt": 5,
+      "El Último Cazador": 5,
+      "La Ciudad de los Perdidos": 3,
+      "Lágrimas de Acero": 4,
+      "Código Letal": 5
+    }
+  },
+  {
+    "username": "Elena",
+    "ratings": {
+      "Cyber Revolt": 4,
+      "Más Allá del Cosmos": 3,
+      "Destino: Marte": 2,
+      "Sombras del Pasado": 5,
+      "El Eco del Silencio": 4
+    }
+  },
+  {
+    "username": "Pablo",
+    "ratings": {
+      "Eclipse Carmesí": 3,
+      "El Último Cazador": 4,
+      "La Ciudad de los Perdidos": 5,
+      "Lágrimas de Acero": 2,
+      "Código Letal": 1
+    }
+  },
+  {
+    "username": "Juanito",
+    "ratings": {
+      "Destino: Marte": 3
+    }
+  }
+]
